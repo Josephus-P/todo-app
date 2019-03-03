@@ -37,7 +37,7 @@ async function verifyToken(req, res, next) {
 
     if (decodedToken) {
       req.body.uid = decodedToken.uid;
-      console.log('verified');
+
       return next();
     } else {
       return res.status(401).send('You are not authorized!');
@@ -60,6 +60,7 @@ server.post('/verifyregistration', async (req, res) => {
   const user = {
     email,
   };
+
   try {
     const data = await db('users').where('uid', uid);
 

@@ -24,9 +24,11 @@ const styles = theme => ({
     display: 'flex',
     alignItems: 'center',
   },
+  messageWrapper: { display: 'inline-block', width: '90%' },
   icon: {
     marginRight: theme.spacing.unit,
   },
+  actionWrapper: { margin: 0, padding: 0 },
 });
 
 const CustomSnackbar = props => {
@@ -64,6 +66,10 @@ const CustomSnackbar = props => {
       <SnackbarContent
         className={snackbarClass}
         aria-describedby="snackbar"
+        classes={{
+          message: classes.messageWrapper,
+          action: classes.actionWrapper,
+        }}
         message={
           <span id="snackbar" className={classes.message}>
             {icon}

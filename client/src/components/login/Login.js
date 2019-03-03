@@ -47,6 +47,12 @@ class Login extends Component {
       });
   };
 
+  snackbarClose = () => {
+    this.setState({
+      openSnackbar: false,
+    });
+  };
+
   render() {
     const { classes, loading, authUser } = this.props;
     const {
