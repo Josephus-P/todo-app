@@ -8,6 +8,7 @@ import Paper from '@material-ui/core/Paper';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Loader from '../loader/Loader';
+import EmptyPage from '../emptypage/EmptyPage';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
@@ -20,10 +21,22 @@ const styles = theme => ({
     marginTop: '25%',
     padding: theme.spacing.unit * 3,
   },
+  addTodoBar: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    marginTop: '25px',
+    padding: theme.spacing.unit * 3,
+  },
+  emptyPage: {
+    height: '70vh',
+    padding: theme.spacing.unit * 3,
+  },
 });
 
 class TodoPage extends Component {
-  state = {};
+  state = {
+    todos: [],
+  };
 
   onChange = event => {
     this.setState({ [event.target]: event.target.value });
@@ -35,6 +48,7 @@ class TodoPage extends Component {
 
   render() {
     const { classes, authUser, loading } = this.props;
+    const { todos } = this.state;
 
     if (loading) {
       return <Loader className={classes.loading} size={80} />;
@@ -59,9 +73,17 @@ class TodoPage extends Component {
           </Toolbar>
         </AppBar>
         <main className={classes.main}>
-          <Paper className={classes.paper}>
-            <Typography>Hello Yaro</Typography>
-          </Paper>
+          <div className={classes.addTodoBar}>
+            <Button variant="contained">Add Todo</Button>
+          </div>
+          {todos.length < 1 ? (
+            <EmptyPage
+              className={classes.emptyPage}
+              variant="h3"
+              message="Please add a todo."
+              color="textSecondary"
+            />
+          ) : null}
         </main>
       </>
     );
