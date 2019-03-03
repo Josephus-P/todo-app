@@ -59,7 +59,6 @@ class Register extends Component {
   render() {
     const { classes, authUser, loading } = this.props;
     const {
-      username,
       email,
       password1,
       password2,

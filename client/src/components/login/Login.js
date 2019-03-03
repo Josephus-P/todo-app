@@ -1,27 +1,68 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import Paper from '@material-ui/core/Paper';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import CustomSnackbar from '../snackbar/CustomSnackbar';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import styles from './styles';
 
+const INITIAL_STATE = {
+  email: '',
+  password: '',
+  openSnackbar: false,
+  snackbarMessage: '',
+  snackbarVariant: '',
+};
+
 class Login extends Component {
   state = {
-    username: '',
-    password: '',
+    ...INITIAL_STATE,
   };
 
-  onChange = event => {
-    this.setState({ [event.target]: event.target.value });
+  handleChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
+  onSubmit = event => {
+    event.preventDefault();
+    const { email, password } = this.state;
+
+    this.props.firebase
+      .signInWithEmailAndPassword(email, password)
+      .then(response => {
+        this.setState({ ...INITIAL_STATE });
+      })
+      .catch(err => {
+        this.setState({
+          snackbarMessage: err.message,
+          openSnackbar: true,
+          snackbarVariant: 'error',
+        });
+      });
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, loading, authUser } = this.props;
+    const {
+      email,
+      password,
+      openSnackbar,
+      snackbarMessage,
+      snackbarVariant,
+    } = this.state;
+
+    if (loading) {
+      return <CircularProgress size={80} />;
+    }
+    if (authUser) {
+      return <Redirect to="/todo" />;
+    }
 
     return (
       <>
@@ -35,13 +76,15 @@ class Login extends Component {
             <Typography component="h1" variant="h5">
               Login
             </Typography>
-            <form className={classes.form}>
+            <form className={classes.form} onSubmit={this.onSubmit}>
               <FormControl margin="normal" required fullWidth>
-                <InputLabel htmlFor="username">Username</InputLabel>
+                <InputLabel htmlFor="email">Email</InputLabel>
                 <Input
-                  id="username"
-                  name="username"
-                  autoComplete="username"
+                  id="email"
+                  name="email"
+                  autoComplete="email"
+                  value={email}
+                  onChange={this.handleChange}
                   autoFocus
                 />
               </FormControl>
@@ -51,6 +94,8 @@ class Login extends Component {
                   name="password"
                   type="password"
                   id="password"
+                  value={password}
+                  onChange={this.handleChange}
                   autoComplete="current-password"
                 />
               </FormControl>
@@ -70,6 +115,13 @@ class Login extends Component {
               </Typography>
             </Link>
           </Paper>
+          <CustomSnackbar
+            open={openSnackbar}
+            variant={snackbarVariant}
+            message={snackbarMessage}
+            onClose={this.snackbarClose}
+            onClick={this.snackbarClose}
+          />
         </main>
       </>
     );
