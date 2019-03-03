@@ -31,6 +31,10 @@ const styles = theme => ({
   submit: {
     marginTop: theme.spacing.unit * 3,
   },
+  loading: {
+    marginTop: '25%',
+    padding: theme.spacing.unit,
+  },
 });
 
 export default styles;

@@ -7,7 +7,7 @@ import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import Loader from '../loader/Loader';
 import CustomSnackbar from '../snackbar/CustomSnackbar';
 import withStyles from '@material-ui/core/styles/withStyles';
 import styles from './styles';
@@ -68,7 +68,7 @@ class Register extends Component {
     } = this.state;
 
     if (loading) {
-      return <CircularProgress size={80} />;
+      return <Loader className={classes.loading} size={80} />;
     }
     if (authUser) {
       return <Redirect to="/todo" />;

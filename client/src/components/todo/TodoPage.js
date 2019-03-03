@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import Loader from '../loader/Loader';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
@@ -15,6 +15,10 @@ const styles = theme => ({
   toolbar: {
     display: 'flex',
     justifyContent: 'space-between',
+  },
+  loading: {
+    marginTop: '25%',
+    padding: theme.spacing.unit * 3,
   },
 });
 
@@ -33,7 +37,7 @@ class TodoPage extends Component {
     const { classes, authUser, loading } = this.props;
 
     if (loading) {
-      return <CircularProgress size={80} />;
+      return <Loader className={classes.loading} size={80} />;
     }
     if (!authUser) {
       return <Redirect to="/login" />;

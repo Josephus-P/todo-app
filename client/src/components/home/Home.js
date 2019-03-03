@@ -1,15 +1,23 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
+import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import Loader from '../loader/Loader';
 import Typography from '@material-ui/core/Typography';
 
+const styles = theme => ({
+  loading: {
+    marginTop: '25%',
+    padding: theme.spacing.unit * 3,
+  },
+});
+
 const Home = props => {
-  const { loading, authUser } = props;
+  const { loading, authUser, classes } = props;
 
   if (loading) {
-    return <CircularProgress size={80} />;
+    return <Loader className={classes.loading} size={80} />;
   }
   if (authUser) {
     return <Redirect to="/todo" />;
@@ -33,4 +41,4 @@ const Home = props => {
   );
 };
 
-export default Home;
+export default withStyles(styles)(Home);
