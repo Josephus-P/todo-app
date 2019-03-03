@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
@@ -7,22 +7,73 @@ import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import CustomSnackbar from '../snackbar/CustomSnackbar';
 import withStyles from '@material-ui/core/styles/withStyles';
 import styles from './styles';
 
+const INITIAL_STATE = {
+  email: '',
+  password1: '',
+  password2: '',
+  openSnackbar: false,
+  snackbarMessage: '',
+  snackbarVariant: '',
+};
+
 class Register extends Component {
   state = {
-    username: '',
-    password1: '',
-    password2: '',
+    ...INITIAL_STATE,
   };
 
-  onChange = event => {
-    this.setState({ [event.target]: event.target.value });
+  handleChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
+  onSubmit = event => {
+    event.preventDefault();
+    const { email, password1 } = this.state;
+
+    this.props.firebase
+      .createUserWithEmailAndPassword(email, password1)
+      .then(response => {
+        console.log(response);
+        this.setState({ ...INITIAL_STATE });
+      })
+      .catch(err => {
+        console.log(err);
+        this.setState({
+          snackbarMessage: err.message,
+          openSnackbar: true,
+          snackbarVariant: 'error',
+        });
+      });
+  };
+
+  snackbarClose = () => {
+    this.setState({
+      openSnackbar: false,
+    });
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, authUser, loading } = this.props;
+    const {
+      username,
+      email,
+      password1,
+      password2,
+      openSnackbar,
+      snackbarVariant,
+      snackbarMessage,
+    } = this.state;
+
+    if (loading) {
+      return <CircularProgress size={80} />;
+    }
+    if (authUser) {
+      return <Redirect to="/todo" />;
+    }
 
     return (
       <>
@@ -36,13 +87,15 @@ class Register extends Component {
             <Typography component="h1" variant="h5">
               Register
             </Typography>
-            <form className={classes.form}>
+            <form className={classes.form} onSubmit={this.onSubmit}>
               <FormControl margin="normal" required fullWidth>
-                <InputLabel htmlFor="username">Username</InputLabel>
+                <InputLabel htmlFor="email">Email</InputLabel>
                 <Input
-                  id="username"
-                  name="username"
-                  autoComplete="username"
+                  id="email"
+                  name="email"
+                  autoComplete="email"
+                  value={email}
+                  onChange={this.handleChange}
                   autoFocus
                 />
               </FormControl>
@@ -52,6 +105,8 @@ class Register extends Component {
                   name="password1"
                   type="password"
                   id="password1"
+                  value={password1}
+                  onChange={this.handleChange}
                   autoComplete="current-password"
                 />
               </FormControl>
@@ -61,6 +116,8 @@ class Register extends Component {
                   name="password2"
                   type="password"
                   id="password2"
+                  value={password2}
+                  onChange={this.handleChange}
                   autoComplete="current-password"
                 />
               </FormControl>
@@ -75,6 +132,13 @@ class Register extends Component {
               </Button>
             </form>
           </Paper>
+          <CustomSnackbar
+            open={openSnackbar}
+            variant={snackbarVariant}
+            message={snackbarMessage}
+            onClose={this.snackbarClose}
+            onClick={this.snackbarClose}
+          />
         </main>
       </>
     );

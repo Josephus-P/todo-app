@@ -34,7 +34,7 @@ class App extends Component {
               })
               .catch(err => {
                 console.log(err);
-                this.props.firebase.doSignOut();
+                this.props.firebase.signOut();
                 this.setState({ loading: false, authError: true });
               });
           });

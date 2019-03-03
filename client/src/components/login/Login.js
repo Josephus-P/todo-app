@@ -64,6 +64,11 @@ class Login extends Component {
                 Login
               </Button>
             </form>
+            <Link to="forgot-pwd">
+              <Typography component="p" variant="body1">
+                Forgot Password?
+              </Typography>
+            </Link>
           </Paper>
         </main>
       </>
