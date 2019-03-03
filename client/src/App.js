@@ -6,6 +6,7 @@ import Home from './components/home/Home';
 import Login from './components/login/Login';
 import Register from './components/register/Register';
 import TodoPage from './components/todo/TodoPage';
+import AddTodoPage from './components/todo/AddTodoPage';
 import axios from 'axios';
 import 'typeface-roboto';
 
@@ -82,12 +83,24 @@ class App extends Component {
           )}
         />
         <Route
+          exact
           path="/todo"
           render={() => (
             <TodoPage
               loading={loading}
               authUser={authUser}
               firebase={firebase}
+            />
+          )}
+        />
+        <Route
+          path="/todo/new"
+          render={props => (
+            <AddTodoPage
+              loading={loading}
+              authUser={authUser}
+              firebase={firebase}
+              {...props}
             />
           )}
         />
