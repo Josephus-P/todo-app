@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
-import FormControl from '@material-ui/core/FormControl';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
 import Paper from '@material-ui/core/Paper';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Typography from '@material-ui/core/Typography';
@@ -38,7 +35,7 @@ class TodoPage extends Component {
         <main className={classes.main}>
           <Paper className={classes.paper}>
             <Typography>Hello Yaro</Typography>
-            <Button onClick={this.signOut} />
+            <Button onClick={this.signOut}>Sign Out</Button>
           </Paper>
         </main>
       </>

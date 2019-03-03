@@ -25,7 +25,7 @@ class App extends Component {
             axios.defaults.headers.common['Authorization'] = idToken;
             console.log(authUser);
             axios
-              .post('/login')
+              .post('/verifyregistration')
               .then(response => {
                 this.setState({
                   authUser: authUser,
