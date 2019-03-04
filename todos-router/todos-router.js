@@ -9,7 +9,9 @@ router.get('/users/todos', async (req, res) => {
   const { uid } = req.body;
 
   try {
-    const todos = await db('todos').where('user_uid', uid);
+    const todos = await db('todos')
+      .where('user_uid', uid)
+      .select('id', 'title', 'createdAt', 'description');
 
     if (todos) {
       res.status(200).json(todos);

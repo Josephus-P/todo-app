@@ -14,44 +14,19 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import axios from 'axios';
-
-const styles = theme => ({
-  toolbar: {
-    display: 'flex',
-    justifyContent: 'space-between',
-  },
-  loading: {
-    marginTop: '25%',
-    padding: theme.spacing.unit * 3,
-  },
-  addTodoBar: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-    marginTop: '25px',
-    padding: theme.spacing.unit * 3,
-  },
-  emptyPage: {
-    height: '70vh',
-    padding: theme.spacing.unit * 3,
-  },
-  gridItem: {
-    padding: theme.spacing.unit * 3,
-  },
-  text: {
-    textDecoration: 'none',
-  },
-});
+import styles from './todoStyles';
 
 class TodoPage extends Component {
   state = {
     todos: [],
+    gettingTodos: true,
   };
 
   componentDidMount() {
     const { authUser } = this.props;
     if (authUser) {
       axios.get('/api/users/todos').then(response => {
-        this.setState({ todos: response.data });
+        this.setState({ todos: response.data, gettingTodos: false });
       });
     }
   }
@@ -63,7 +38,7 @@ class TodoPage extends Component {
 
     if (authUser && authUser !== prevProps.authUser) {
       axios.get('/api/users/todos').then(response => {
-        this.setState({ todos: response.data });
+        this.setState({ todos: response.data, gettingTodos: false });
       });
     }
   }
@@ -74,9 +49,9 @@ class TodoPage extends Component {
 
   render() {
     const { classes, authUser, loading } = this.props;
-    const { todos } = this.state;
+    const { todos, gettingTodos } = this.state;
 
-    if (loading) {
+    if (loading || gettingTodos) {
       return <Loader className={classes.loading} size={80} />;
     }
     if (!authUser) {
@@ -87,12 +62,11 @@ class TodoPage extends Component {
       <>
         <AppBar position="static">
           <Toolbar className={classes.toolbar}>
-            <IconButton color="inherit" aria-label="Menu">
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" color="inherit">
-              Todo
-            </Typography>
+            <Link className={classes.link} to="/todo">
+              <Typography color="inherit" component="h2" variant="h5">
+                Todo App
+              </Typography>
+            </Link>
             <Button color="inherit" onClick={this.signOut}>
               Sign Out
             </Button>
