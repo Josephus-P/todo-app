@@ -56,15 +56,15 @@ server.get('/', (req, res) => {
 
 // Check if the user exists in the DB. If not, insert the user
 server.post('/verifyregistration', async (req, res) => {
-  const { uid, email } = req.body;
+  const { uid } = req.body;
   const user = {
-    email,
+    uid,
   };
 
   try {
     const data = await db('users').where('uid', uid);
 
-    if (data) {
+    if (data.length > 0) {
       res.status(200).json(data);
     } else {
       const id = await db('users').insert(user);
@@ -76,6 +76,7 @@ server.post('/verifyregistration', async (req, res) => {
       res.status(500).json({ error: 'Error verifying registration' });
     }
   } catch (err) {
+    console.log(err);
     res.status(500).json({ error: 'Error verifying registration' });
   }
 });

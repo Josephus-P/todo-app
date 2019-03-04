@@ -17,7 +17,7 @@ import moment from 'moment';
 import axios from 'axios';
 import styles from './addTodoStyles';
 
-class TodoPage extends Component {
+class AddTodoPage extends Component {
   state = {
     title: '',
     description: '',
@@ -114,8 +114,8 @@ class TodoPage extends Component {
   }
 }
 
-TodoPage.propTypes = {
+AddTodoPage.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(TodoPage);
+export default withStyles(styles)(AddTodoPage);
