@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { withFirebase } from './components/firebase';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Home from './components/home/Home';
@@ -61,62 +61,69 @@ class App extends Component {
     return (
       <div className="App">
         <CssBaseline />
-        <Route
-          exact
-          path="/"
-          render={() => (
-            <Home loading={loading} authUser={authUser} firebase={firebase} />
-          )}
-        />
-        <Route
-          path="/login"
-          render={() => (
-            <Login loading={loading} authUser={authUser} firebase={firebase} />
-          )}
-        />
-        <Route
-          path="/register"
-          render={() => (
-            <Register
-              loading={loading}
-              authUser={authUser}
-              firebase={firebase}
-            />
-          )}
-        />
-        <Route
-          exact
-          path="/todo"
-          render={() => (
-            <TodoPage
-              loading={loading}
-              authUser={authUser}
-              firebase={firebase}
-            />
-          )}
-        />
-        <Route
-          path="/todo/new"
-          render={props => (
-            <AddTodoPage
-              loading={loading}
-              authUser={authUser}
-              firebase={firebase}
-              {...props}
-            />
-          )}
-        />
-        <Route
-          path="/todo/:id"
-          render={props => (
-            <ViewTodoPage
-              loading={loading}
-              authUser={authUser}
-              firebase={firebase}
-              {...props}
-            />
-          )}
-        />
+        <Switch>
+          <Route
+            exact
+            path="/"
+            render={() => (
+              <Home loading={loading} authUser={authUser} firebase={firebase} />
+            )}
+          />
+          <Route
+            path="/login"
+            render={() => (
+              <Login
+                loading={loading}
+                authUser={authUser}
+                firebase={firebase}
+              />
+            )}
+          />
+          <Route
+            path="/register"
+            render={() => (
+              <Register
+                loading={loading}
+                authUser={authUser}
+                firebase={firebase}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/todo"
+            render={() => (
+              <TodoPage
+                loading={loading}
+                authUser={authUser}
+                firebase={firebase}
+              />
+            )}
+          />
+          <Route
+            path="/todo/new"
+            render={props => (
+              <AddTodoPage
+                loading={loading}
+                authUser={authUser}
+                firebase={firebase}
+                {...props}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/todo/:id"
+            render={props => (
+              <ViewTodoPage
+                loading={loading}
+                authUser={authUser}
+                firebase={firebase}
+                {...props}
+              />
+            )}
+          />
+        </Switch>
       </div>
     );
   }
