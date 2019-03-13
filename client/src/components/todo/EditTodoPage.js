@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import AppBar from '@material-ui/core/AppBar';
@@ -15,9 +15,9 @@ import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import moment from 'moment';
 import axios from 'axios';
-import styles from './addTodoStyles';
+import styles from './editTodoStyles';
 
-class AddTodoPage extends Component {
+class EditTodoPage extends Component {
   state = {
     title: '',
     description: '',
@@ -42,12 +42,7 @@ class AddTodoPage extends Component {
     axios
       .post('/api/todos', todo)
       .then(response => {
-        const note = todo;
-
-        // SQLite3 and PostgreSQL return data differently so the next
-        // line sets the id accordingly
-        todo.id = response.data[0].id ? response.data[0].id : response.data[0];
-        this.props.history.push(`/todo/${todo.id}`, todo);
+        this.props.history.push('/todo');
       })
       .catch(err => {
         console.log(err);
@@ -118,8 +113,8 @@ class AddTodoPage extends Component {
   }
 }
 
-AddTodoPage.propTypes = {
+EditTodoPage.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(AddTodoPage);
+export default withStyles(styles)(EditTodoPage);

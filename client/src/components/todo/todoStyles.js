@@ -4,8 +4,14 @@ const styles = theme => ({
     justifyContent: 'space-between',
   },
   loading: {
-    marginTop: '25%',
+    marginTop: '50%',
     padding: theme.spacing.unit * 3,
+    [theme.breakpoints.up(700)]: {
+      marginTop: '25%',
+    },
+    [theme.breakpoints.up('lg')]: {
+      marginTop: '20%',
+    },
   },
   addTodoBar: {
     display: 'flex',

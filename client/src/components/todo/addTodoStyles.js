@@ -4,8 +4,14 @@ const styles = theme => ({
     justifyContent: 'space-between',
   },
   loading: {
-    marginTop: '25%',
+    marginTop: '50%',
     padding: theme.spacing.unit * 3,
+    [theme.breakpoints.up(700)]: {
+      marginTop: '25%',
+    },
+    [theme.breakpoints.up('lg')]: {
+      marginTop: '20%',
+    },
   },
   title: {
     width: '100%',
@@ -40,6 +46,10 @@ const styles = theme => ({
     width: '100%',
     justifyContent: 'center',
     padding: theme.spacing.unit * 3,
+  },
+  link: {
+    textDecoration: 'none',
+    color: 'inherit',
   },
 });
 

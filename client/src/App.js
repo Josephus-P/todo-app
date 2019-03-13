@@ -7,10 +7,9 @@ import Login from './components/login/Login';
 import Register from './components/register/Register';
 import TodoPage from './components/todo/TodoPage';
 import AddTodoPage from './components/todo/AddTodoPage';
-import viewTodoPage from './components/todo/ViewTodoPage';
 import axios from 'axios';
-import 'typeface-roboto';
 import ViewTodoPage from './components/todo/ViewTodoPage';
+import 'typeface-roboto';
 
 class App extends Component {
   state = {

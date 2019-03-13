@@ -29,6 +29,7 @@ admin.initializeApp({
 });
 
 // Middleware function to verify Firebase token
+// Adds the user's UID to the request body
 async function verifyToken(req, res, next) {
   const idToken = req.headers.authorization;
 
