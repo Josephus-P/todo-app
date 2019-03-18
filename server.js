@@ -3,9 +3,8 @@ const server = express();
 const cors = require('cors');
 const admin = require('firebase-admin');
 const db = require('./db/dbConfig');
-const dotenv = require('dotenv');
-dotenv.load();
 const todosRouter = require('./todos-router/todos-router.js');
+require('dotenv').load();
 
 server.use(express.json());
 server.use(cors());
