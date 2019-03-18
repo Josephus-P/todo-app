@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Loader from '../loader/Loader';
 import EmptyPage from '../emptypage/EmptyPage';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
@@ -82,7 +78,6 @@ class TodoPage extends Component {
       todo => checked.indexOf(todo.id) === -1
     );
 
-    console.log(checked);
     axios
       .delete('/api/todos', { data: { checked } })
       .then(response => {
@@ -117,23 +112,20 @@ class TodoPage extends Component {
           </Toolbar>
         </AppBar>
         <main className={classes.main}>
-          <div className={classes.addTodoBar}>
-            <Button component={Link} to="/todo/new" variant="contained">
-              Add Todo
-            </Button>
-            <Button variant="contained" onClick={this.deleteTodos}>
-              Delete
-            </Button>
-          </div>
           <Grid container spacing={0} justify="center">
-            <Grid
-              className={classes.gridItem}
-              item
-              xs={12}
-              sm={6}
-              md={4}
-              lg={3}
-            >
+            <Grid className={classes.gridItem} item xs={12} sm={6} md={4}>
+              <div className={classes.todoBar}>
+                <Button component={Link} to="/todo/new" variant="contained">
+                  Add Todo
+                </Button>
+                <Button variant="contained" onClick={this.deleteTodos}>
+                  Delete
+                </Button>
+              </div>
+            </Grid>
+          </Grid>
+          <Grid container spacing={0} justify="center">
+            <Grid className={classes.gridItem} item xs={12} sm={6} md={4}>
               {todos.length < 1 ? (
                 <EmptyPage
                   className={classes.emptyPage}

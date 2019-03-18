@@ -40,8 +40,6 @@ class AddTodoPage extends Component {
     axios
       .post('/api/todos', todo)
       .then(response => {
-        const note = todo;
-
         // SQLite3 and PostgreSQL return data differently so the next
         // line sets the id accordingly
         todo.id = response.data[0].id ? response.data[0].id : response.data[0];

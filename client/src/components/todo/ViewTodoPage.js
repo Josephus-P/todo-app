@@ -20,8 +20,6 @@ class ViewTodoPage extends Component {
     const { classes, authUser, loading, location } = this.props;
     const todo = { ...location.state };
 
-    console.log(this.props);
-
     if (loading) {
       return <Loader className={classes.loading} size={80} />;
     }

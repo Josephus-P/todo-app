@@ -13,11 +13,10 @@ const styles = theme => ({
       marginTop: '20%',
     },
   },
-  addTodoBar: {
+  todoBar: {
     display: 'flex',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     marginTop: '25px',
-    padding: theme.spacing.unit * 3,
   },
   emptyPage: {
     height: '70vh',
