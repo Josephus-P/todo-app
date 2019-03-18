@@ -15,7 +15,7 @@ const styles = theme => ({
   },
   addTodoBar: {
     display: 'flex',
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
     marginTop: '25px',
     padding: theme.spacing.unit * 3,
   },
@@ -25,6 +25,9 @@ const styles = theme => ({
   },
   gridItem: {
     padding: theme.spacing.unit * 3,
+  },
+  list: {
+    backgroundColor: theme.palette.background.paper,
   },
   text: {
     textDecoration: 'none',

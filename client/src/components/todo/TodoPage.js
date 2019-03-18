@@ -11,6 +11,11 @@ import Loader from '../loader/Loader';
 import EmptyPage from '../emptypage/EmptyPage';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import ListItemText from '@material-ui/core/ListItemText';
+import Checkbox from '@material-ui/core/Checkbox';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import axios from 'axios';
@@ -20,6 +25,7 @@ class TodoPage extends Component {
   state = {
     todos: [],
     gettingTodos: true,
+    checked: [],
   };
 
   componentDidMount() {
@@ -47,9 +53,47 @@ class TodoPage extends Component {
     this.props.firebase.signOut();
   };
 
+  handleCheckToggle = id => () => {
+    const { checked } = this.state;
+    const currentID = checked.indexOf(id);
+    const newChecked = [...checked];
+
+    if (currentID === -1) {
+      newChecked.push(id);
+    } else {
+      newChecked.splice(currentID, 1);
+    }
+
+    this.setState({
+      checked: newChecked,
+    });
+  };
+
+  deleteTodos = event => {
+    event.preventDefault();
+
+    const { checked } = this.state;
+
+    if (checked.length < 1) {
+      return;
+    }
+
+    const todos = this.state.todos.filter(
+      todo => checked.indexOf(todo.id) === -1
+    );
+
+    console.log(checked);
+    axios
+      .delete('/api/todos', { data: { checked } })
+      .then(response => {
+        this.setState({ todos, checked: [] });
+      })
+      .catch(err => console.log(err));
+  };
+
   render() {
     const { classes, authUser, loading } = this.props;
-    const { todos, gettingTodos } = this.state;
+    const { todos, gettingTodos, checked } = this.state;
 
     if (loading || gettingTodos) {
       return <Loader className={classes.loading} size={80} />;
@@ -77,41 +121,55 @@ class TodoPage extends Component {
             <Button component={Link} to="/todo/new" variant="contained">
               Add Todo
             </Button>
+            <Button variant="contained" onClick={this.deleteTodos}>
+              Delete
+            </Button>
           </div>
-          <Grid container spacing={0} justify="flex-start">
-            {todos.length < 1 ? (
-              <EmptyPage
-                className={classes.emptyPage}
-                variant="h3"
-                message="Please add a todo."
-                color="textSecondary"
-              />
-            ) : (
-              todos.map((todo, index) => (
-                <Grid
-                  key={index}
-                  className={classes.gridItem}
-                  item
-                  xs={12}
-                  sm={6}
-                  md={4}
-                  lg={3}
-                >
-                  <Link
-                    className={classes.text}
-                    to={{ pathname: `/todo/${todo.id}`, state: { ...todo } }}
-                  >
-                    <Card>
-                      <CardContent>
-                        <Typography component="p" variant="h6" align="center">
-                          {todo.title}
-                        </Typography>
-                      </CardContent>
-                    </Card>
-                  </Link>
-                </Grid>
-              ))
-            )}
+          <Grid container spacing={0} justify="center">
+            <Grid
+              className={classes.gridItem}
+              item
+              xs={12}
+              sm={6}
+              md={4}
+              lg={3}
+            >
+              {todos.length < 1 ? (
+                <EmptyPage
+                  className={classes.emptyPage}
+                  variant="h3"
+                  message="Please add a todo."
+                  color="textSecondary"
+                />
+              ) : (
+                <List className={classes.list}>
+                  {todos.map((todo, index) => (
+                    <ListItem
+                      key={index}
+                      button
+                      onClick={this.handleCheckToggle(todo.id)}
+                    >
+                      <Checkbox
+                        checked={checked.indexOf(todo.id) !== -1}
+                        tabIndex={-1}
+                      />
+                      <ListItemText primary={todo.title} />
+                      <ListItemSecondaryAction>
+                        <Button
+                          component={Link}
+                          to={{
+                            pathname: `/todo/${todo.id}`,
+                            state: { ...todo },
+                          }}
+                        >
+                          View
+                        </Button>
+                      </ListItemSecondaryAction>
+                    </ListItem>
+                  ))}
+                </List>
+              )}
+            </Grid>
           </Grid>
         </main>
       </>

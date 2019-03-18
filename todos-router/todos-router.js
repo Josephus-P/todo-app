@@ -70,12 +70,12 @@ router.put('/todos/:id', async (req, res) => {
 });
 
 // Delete a specified todo
-router.delete('/todos/:id', async (req, res) => {
-  const { id } = req.params;
+router.delete('/todos', async (req, res) => {
+  const { checked } = req.body;
 
   try {
     const data = await db('todos')
-      .where('id', id)
+      .whereIn('id', checked)
       .del();
 
     if (data) {
