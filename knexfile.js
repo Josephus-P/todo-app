@@ -12,19 +12,14 @@ module.exports = {
     },
   },
 
-  staging: {
-    client: 'postgresql',
+  test: {
+    client: 'sqlite3',
     connection: {
-      database: 'my_db',
-      user: 'username',
-      password: 'password',
+      filename: './db/test.sqlite3',
     },
-    pool: {
-      min: 2,
-      max: 10,
-    },
+    useNullAsDefault: true,
     migrations: {
-      tableName: 'knex_migrations',
+      directory: './db/migrations',
     },
   },
 
