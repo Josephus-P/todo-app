@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const dbConfig = require('../knexfile.js');
-const knex = require('knex');
-const db = knex(dbConfig.development);
+const db = require('./db/dbConfig');
 
 // Return all todos for a user
 router.get('/users/todos', async (req, res) => {
