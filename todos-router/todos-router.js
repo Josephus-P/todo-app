@@ -33,7 +33,7 @@ router.post('/todos', async (req, res) => {
   };
 
   try {
-    const id = await db('todos').insert(todo);
+    const id = await db('todos').insert(todo, ['id']);
 
     if (id) {
       res.status(201).json(id);
