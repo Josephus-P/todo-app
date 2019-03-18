@@ -5,7 +5,10 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import Firebase, { FirebaseContext } from './components/firebase';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:8000';
+axios.defaults.baseURL =
+  process.env.NODE_ENV === 'production'
+    ? 'https://yaro-todo.herokuapp.com/'
+    : 'http://localhost:8000';
 
 ReactDOM.render(
   <FirebaseContext.Provider value={new Firebase()}>
