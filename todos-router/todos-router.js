@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const db = require('./db/dbConfig');
+const db = require('../db/dbConfig');
 
 // Return all todos for a user
 router.get('/users/todos', async (req, res) => {
