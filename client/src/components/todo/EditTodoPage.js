@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import IconButton from '@material-ui/core/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import AppBar from '@material-ui/core/AppBar';
@@ -13,14 +11,13 @@ import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
-import moment from 'moment';
 import axios from 'axios';
 import styles from './editTodoStyles';
 
 class EditTodoPage extends Component {
   state = {
-    title: '',
-    description: '',
+    title: this.props.location.state.title,
+    description: this.props.location.state.description,
   };
 
   handleChange = event => {
@@ -33,16 +30,17 @@ class EditTodoPage extends Component {
 
   onSubmit = event => {
     event.preventDefault();
-    const todo = { ...this.state, createdAt: moment().format() };
+    const { id } = this.props.location.state;
+    const todo = { ...this.state };
 
     if (todo.title === '' || todo.description === '') {
       return;
     }
 
     axios
-      .post('/api/todos', todo)
+      .put(`/api/todos/${id}`, todo)
       .then(response => {
-        this.props.history.push('/todo');
+        this.props.history.push(`/todo/${id}`, { id, ...todo });
       })
       .catch(err => {
         console.log(err);
@@ -50,7 +48,7 @@ class EditTodoPage extends Component {
   };
 
   render() {
-    const { classes, authUser, loading } = this.props;
+    const { classes, authUser, loading, location } = this.props;
     const { title, description } = this.state;
 
     if (loading) {
@@ -58,6 +56,9 @@ class EditTodoPage extends Component {
     }
     if (!authUser) {
       return <Redirect to="/login" />;
+    }
+    if (!location.state) {
+      return <Redirect to="/todo" />;
     }
 
     return (
@@ -77,7 +78,7 @@ class EditTodoPage extends Component {
         <main className={classes.main}>
           <Paper className={classes.paper}>
             <Typography className={classes.title} component="h5" variant="h5">
-              Add a Todo
+              Edit Todo
             </Typography>
             <form onSubmit={this.onSubmit} className={classes.form}>
               <FormControl margin="normal" required fullWidth>
@@ -102,7 +103,7 @@ class EditTodoPage extends Component {
               </FormControl>
               <div className={classes.buttonWrapper}>
                 <Button variant="contained" type="submit">
-                  Add Todo
+                  Update
                 </Button>
               </div>
             </form>

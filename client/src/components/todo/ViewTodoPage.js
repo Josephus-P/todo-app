@@ -49,7 +49,17 @@ class ViewTodoPage extends Component {
         <main className={classes.main}>
           <Paper className={classes.paper}>
             <div className={classes.buttonWrapper}>
-              <Button component={Link} to={`${location.pathname}/edit`}>
+              <Button
+                component={Link}
+                to={{
+                  pathname: `${location.pathname}/edit`,
+                  state: {
+                    id: todo.id,
+                    title: todo.title,
+                    description: todo.description,
+                  },
+                }}
+              >
                 Edit
               </Button>
             </div>
