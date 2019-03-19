@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import IconButton from '@material-ui/core/IconButton';
+import ArrowBack from '@material-ui/icons/ArrowBack';
+import Home from '@material-ui/icons/Home';
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
@@ -73,8 +76,18 @@ class Login extends Component {
     return (
       <>
         <nav className={classes.nav}>
-          <Typography component="p" variant="body1">
-            Don't have an account yet? Register <Link to="/register">Here</Link>
+          <div className={classes.navIcons}>
+            <IconButton component={Link} to="/">
+              <ArrowBack />
+            </IconButton>
+            <Home style={{ alignSelf: 'center' }} />
+          </div>
+          <Typography
+            component="p"
+            variant="body1"
+            style={{ alignSelf: 'center' }}
+          >
+            No account? Register <Link to="/register">Here</Link>
           </Typography>
         </nav>
         <main className={classes.main}>

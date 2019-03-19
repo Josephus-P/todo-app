@@ -2,8 +2,11 @@ const styles = theme => ({
   nav: {
     display: 'flex',
     width: '100%',
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
     padding: theme.spacing.unit * 3,
+  },
+  navIcons: {
+    display: 'flex',
   },
   main: {
     width: 'auto',
