@@ -114,3 +114,7 @@ The file should look like this:
 } 
 ```
 ## Mocha/Chai
+Running the Mocha/Chai tests will require an extra environment variable;
+
+- Go to the `General` tab of your Firebase project settings dashboard, find the `Web Api Key` and add it to your root `.env` as a variable called `FIREBASE_WEB_API_KEY`
+- To run the tests, make sure you're in the root directory and run `yarn test`
