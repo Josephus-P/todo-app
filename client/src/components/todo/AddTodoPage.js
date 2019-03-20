@@ -102,7 +102,7 @@ class AddTodoPage extends Component {
                 />
               </FormControl>
               <div className={classes.buttonWrapper}>
-                <Button variant="contained" type="submit">
+                <Button variant="contained" type="submit" color="primary">
                   Add Todo
                 </Button>
               </div>

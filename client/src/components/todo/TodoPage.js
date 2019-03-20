@@ -115,10 +115,19 @@ class TodoPage extends Component {
           <Grid container spacing={0} justify="center">
             <Grid className={classes.gridItem} item xs={12} sm={6} md={4}>
               <div className={classes.todoBar}>
-                <Button component={Link} to="/todo/new" variant="contained">
+                <Button
+                  component={Link}
+                  to="/todo/new"
+                  variant="contained"
+                  color="primary"
+                >
                   Add Todo
                 </Button>
-                <Button variant="contained" onClick={this.deleteTodos}>
+                <Button
+                  variant="contained"
+                  onClick={this.deleteTodos}
+                  color="primary"
+                >
                   Delete
                 </Button>
               </div>
@@ -144,6 +153,7 @@ class TodoPage extends Component {
                       <Checkbox
                         checked={checked.indexOf(todo.id) !== -1}
                         tabIndex={-1}
+                        color="primary"
                       />
                       <ListItemText primary={todo.title} />
                       <ListItemSecondaryAction>
@@ -153,6 +163,7 @@ class TodoPage extends Component {
                             pathname: `/todo/${todo.id}`,
                             state: { ...todo },
                           }}
+                          color="primary"
                         >
                           View
                         </Button>

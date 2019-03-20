@@ -36,10 +36,20 @@ const Home = props => {
         The only todo app you need!
       </Typography>
       <div className={classes.buttons}>
-        <Button variant="contained" component={Link} to="/login">
+        <Button
+          variant="contained"
+          component={Link}
+          to="/login"
+          color="primary"
+        >
           Login
         </Button>
-        <Button variant="contained" component={Link} to="/register">
+        <Button
+          variant="contained"
+          component={Link}
+          to="/register"
+          color="primary"
+        >
           Signup
         </Button>
       </div>

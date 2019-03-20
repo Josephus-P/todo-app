@@ -57,6 +57,7 @@ class ViewTodoPage extends Component {
                     description: todo.description,
                   },
                 }}
+                color="primary"
               >
                 Edit
               </Button>

@@ -77,10 +77,10 @@ class Login extends Component {
       <>
         <nav className={classes.nav}>
           <div className={classes.navIcons}>
-            <IconButton component={Link} to="/">
+            <IconButton component={Link} to="/" color="primary">
               <ArrowBack />
             </IconButton>
-            <Home style={{ alignSelf: 'center' }} />
+            <Home style={{ alignSelf: 'center' }} color="primary" />
           </div>
           <Typography
             component="p"
