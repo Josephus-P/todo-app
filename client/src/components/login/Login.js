@@ -13,6 +13,7 @@ import Loader from '../loader/Loader';
 import CustomSnackbar from '../snackbar/CustomSnackbar';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
+import * as ROUTES from '../../constants/routes';
 import styles from './styles';
 
 const INITIAL_STATE = {
@@ -77,7 +78,7 @@ class Login extends Component {
       <>
         <nav className={classes.nav}>
           <div className={classes.navIcons}>
-            <IconButton component={Link} to="/">
+            <IconButton component={Link} to={ROUTES.LANDING}>
               <ArrowBack />
             </IconButton>
             <Home style={{ alignSelf: 'center' }} color="primary" />
@@ -87,7 +88,7 @@ class Login extends Component {
             variant="body1"
             style={{ alignSelf: 'center' }}
           >
-            No account? Register <Link to="/register">Here</Link>
+            No account? Register <Link to={ROUTES.REGISTER}>Here</Link>
           </Typography>
         </nav>
         <main className={classes.main}>

@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import moment from 'moment';
 import axios from 'axios';
+import * as ROUTES from '../../constants/routes';
 import styles from './addTodoStyles';
 
 class AddTodoPage extends Component {
@@ -58,14 +59,14 @@ class AddTodoPage extends Component {
       return <Loader className={classes.loading} size={80} />;
     }
     if (!authUser) {
-      return <Redirect to="/login" />;
+      return <Redirect to={ROUTES.SIGNIN} />;
     }
 
     return (
       <>
         <AppBar position="static">
           <Toolbar className={classes.toolbar}>
-            <Link className={classes.link} to="/todo">
+            <Link className={classes.link} to={ROUTES.TODO_DASH}>
               <Typography color="inherit" component="h2" variant="h5">
                 Todo App
               </Typography>
@@ -108,7 +109,7 @@ class AddTodoPage extends Component {
                 </Button>
                 <Button
                   component={Link}
-                  to="/todo"
+                  to={ROUTES.TODO_DASH}
                   variant="contained"
                   type="submit"
                   color="primary"

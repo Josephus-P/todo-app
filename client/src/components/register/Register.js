@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import Loader from '../loader/Loader';
 import CustomSnackbar from '../snackbar/CustomSnackbar';
 import withStyles from '@material-ui/core/styles/withStyles';
+import * as ROUTES from '../../constants/routes';
 import styles from './styles';
 
 const INITIAL_STATE = {
@@ -40,7 +41,6 @@ class Register extends Component {
     this.props.firebase
       .createUserWithEmailAndPassword(email, password1)
       .then(response => {
-        console.log(response);
         this.setState({ ...INITIAL_STATE });
       })
       .catch(err => {
@@ -81,7 +81,7 @@ class Register extends Component {
       <>
         <nav className={classes.nav}>
           <div className={classes.navIcons}>
-            <IconButton component={Link} to="/">
+            <IconButton component={Link} to={ROUTES.LANDING}>
               <ArrowBack />
             </IconButton>
             <Home style={{ alignSelf: 'center' }} color="primary" />
@@ -91,7 +91,7 @@ class Register extends Component {
             variant="body1"
             style={{ alignSelf: 'center' }}
           >
-            Already have an account? Login <Link to="/login">Here</Link>
+            Already have an account? Login <Link to={ROUTES.SIGNIN}>Here</Link>
           </Typography>
         </nav>
         <main className={classes.main}>

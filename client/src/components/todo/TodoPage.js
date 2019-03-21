@@ -15,6 +15,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import axios from 'axios';
+import * as ROUTES from '../../constants/routes';
 import styles from './todoStyles';
 
 class TodoPage extends Component {
@@ -95,14 +96,14 @@ class TodoPage extends Component {
       return <Loader className={classes.loading} size={80} />;
     }
     if (!authUser) {
-      return <Redirect to="/login" />;
+      return <Redirect to={ROUTES.SIGNIN} />;
     }
 
     return (
       <>
         <AppBar position="static">
           <Toolbar className={classes.toolbar}>
-            <Link className={classes.link} to="/todo">
+            <Link className={classes.link} to={ROUTES.TODO_DASH}>
               <Typography color="inherit" component="h2" variant="h5">
                 Todo App
               </Typography>
@@ -118,7 +119,7 @@ class TodoPage extends Component {
               <div className={classes.todoBar}>
                 <Button
                   component={Link}
-                  to="/todo/new"
+                  to={ROUTES.TODO_ADD}
                   variant="contained"
                   color="primary"
                 >

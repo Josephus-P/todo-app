@@ -12,6 +12,7 @@ import AddTodoPage from './components/todo/AddTodoPage';
 import EditTodoPage from './components/todo/EditTodoPage';
 import axios from 'axios';
 import ViewTodoPage from './components/todo/ViewTodoPage';
+import * as ROUTES from './constants/routes';
 import theme from './theme/theme';
 import 'typeface-roboto';
 
@@ -68,7 +69,7 @@ class App extends Component {
           <Switch>
             <Route
               exact
-              path="/"
+              path={ROUTES.LANDING}
               render={() => (
                 <Home
                   loading={loading}
@@ -78,7 +79,7 @@ class App extends Component {
               )}
             />
             <Route
-              path="/login"
+              path={ROUTES.SIGNIN}
               render={() => (
                 <Login
                   loading={loading}
@@ -88,7 +89,7 @@ class App extends Component {
               )}
             />
             <Route
-              path="/register"
+              path={ROUTES.REGISTER}
               render={() => (
                 <Register
                   loading={loading}
@@ -98,7 +99,7 @@ class App extends Component {
               )}
             />
             <Route
-              path="/password-reset"
+              path={ROUTES.PWD_FORGOT}
               render={() => (
                 <PasswordReset
                   loading={loading}
@@ -109,7 +110,7 @@ class App extends Component {
             />
             <Route
               exact
-              path="/todo"
+              path={ROUTES.TODO_DASH}
               render={() => (
                 <TodoPage
                   loading={loading}
@@ -119,7 +120,7 @@ class App extends Component {
               )}
             />
             <Route
-              path="/todo/new"
+              path={ROUTES.TODO_ADD}
               render={props => (
                 <AddTodoPage
                   loading={loading}
@@ -131,7 +132,7 @@ class App extends Component {
             />
             <Route
               exact
-              path="/todo/:id"
+              path={ROUTES.TODO_VIEW}
               render={props => (
                 <ViewTodoPage
                   loading={loading}
@@ -143,7 +144,7 @@ class App extends Component {
             />
             <Route
               exact
-              path="/todo/:id/edit"
+              path={ROUTES.TODO_EDIT}
               render={props => (
                 <EditTodoPage
                   loading={loading}

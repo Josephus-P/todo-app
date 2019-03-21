@@ -12,6 +12,7 @@ import Loader from '../loader/Loader';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import moment from 'moment';
+import * as ROUTES from '../../constants/routes';
 import styles from './viewTodoStyles';
 
 class ViewTodoPage extends Component {
@@ -27,17 +28,17 @@ class ViewTodoPage extends Component {
       return <Loader className={classes.loading} size={80} />;
     }
     if (!authUser) {
-      return <Redirect to="/login" />;
+      return <Redirect to={ROUTES.SIGNIN} />;
     }
     if (!location.state) {
-      return <Redirect to="/todo" />;
+      return <Redirect to={ROUTES.TODO_DASH} />;
     }
 
     return (
       <>
         <AppBar position="static">
           <Toolbar className={classes.toolbar}>
-            <Link className={classes.link} to="/todo">
+            <Link className={classes.link} to={ROUTES.TODO_DASH}>
               <Typography color="inherit" component="h2" variant="h5">
                 Todo App
               </Typography>
@@ -48,7 +49,7 @@ class ViewTodoPage extends Component {
           </Toolbar>
         </AppBar>
         <div className={classes.navIcons}>
-          <IconButton component={Link} to="/todo">
+          <IconButton component={Link} to={ROUTES.TODO_DASH}>
             <ArrowBack />
           </IconButton>
           <Assignment style={{ alignSelf: 'center' }} color="primary" />
