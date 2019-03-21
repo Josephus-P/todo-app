@@ -92,6 +92,7 @@ class EditTodoPage extends Component {
                   name="title"
                   value={title}
                   onChange={this.handleChange}
+                  autoFocus
                 />
               </FormControl>
               <FormControl margin="normal" required fullWidth>
