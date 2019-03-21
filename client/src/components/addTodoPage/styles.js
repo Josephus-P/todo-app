@@ -1,8 +1,4 @@
 const styles = theme => ({
-  toolbar: {
-    display: 'flex',
-    justifyContent: 'space-between',
-  },
   loading: {
     marginTop: '50%',
     padding: theme.spacing.unit * 3,
@@ -12,6 +8,17 @@ const styles = theme => ({
     [theme.breakpoints.up('lg')]: {
       marginTop: '20%',
     },
+  },
+  title: {
+    width: '100%',
+    textAlign: 'center',
+    padding: theme.spacing.unit * 3,
+  },
+  main: {
+    display: 'flex',
+    justifyContent: 'center',
+    width: '100%',
+    marginTop: '50px',
   },
   paper: {
     width: '90%',
@@ -26,31 +33,14 @@ const styles = theme => ({
       width: '40%',
     },
   },
-  main: {
-    display: 'flex',
-    justifyContent: 'center',
-    width: '100%',
-    marginTop: '25px',
-  },
-  navIcons: {
-    display: 'flex',
-    justifyContent: 'flex-start',
-    width: '100%',
-    marginTop: '25px',
-    paddingLeft: '50px',
-  },
-  link: {
-    textDecoration: 'none',
-    color: 'inherit',
+  form: {
+    width: '60%',
+    margin: '0 auto',
   },
   buttonWrapper: {
     display: 'flex',
-    justifyContent: 'flex-end',
-  },
-  title: {
-    padding: theme.spacing.unit * 3,
-  },
-  description: {
+    width: '100%',
+    justifyContent: 'space-around',
     padding: theme.spacing.unit * 3,
   },
 });

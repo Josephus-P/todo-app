@@ -1,8 +1,4 @@
 const styles = theme => ({
-  toolbar: {
-    display: 'flex',
-    justifyContent: 'space-between',
-  },
   loading: {
     marginTop: '50%',
     padding: theme.spacing.unit * 3,
@@ -46,10 +42,6 @@ const styles = theme => ({
     width: '100%',
     justifyContent: 'space-around',
     padding: theme.spacing.unit * 3,
-  },
-  link: {
-    textDecoration: 'none',
-    color: 'inherit',
   },
 });
 
