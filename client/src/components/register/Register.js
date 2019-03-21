@@ -36,7 +36,17 @@ class Register extends Component {
 
   onSubmit = event => {
     event.preventDefault();
-    const { email, password1 } = this.state;
+    const { email, password1, password2 } = this.state;
+
+    if (password1 !== password2) {
+      this.setState({
+        snackbarMessage: "Passwords don't match!",
+        openSnackbar: true,
+        snackbarVariant: 'error',
+      });
+
+      return;
+    }
 
     this.props.firebase
       .createUserWithEmailAndPassword(email, password1)
