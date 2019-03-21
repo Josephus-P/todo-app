@@ -89,6 +89,7 @@ class TodoPage extends Component {
   render() {
     const { classes, authUser, loading } = this.props;
     const { todos, gettingTodos, checked } = this.state;
+    const disabled = checked.length > 0 ? false : true;
 
     if (loading || gettingTodos) {
       return <Loader className={classes.loading} size={80} />;
@@ -127,6 +128,7 @@ class TodoPage extends Component {
                   variant="contained"
                   onClick={this.deleteTodos}
                   color="primary"
+                  disabled={disabled}
                 >
                   Delete
                 </Button>
