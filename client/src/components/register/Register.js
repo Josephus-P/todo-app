@@ -81,7 +81,7 @@ class Register extends Component {
       <>
         <nav className={classes.nav}>
           <div className={classes.navIcons}>
-            <IconButton component={Link} to="/" color="primary">
+            <IconButton component={Link} to="/">
               <ArrowBack />
             </IconButton>
             <Home style={{ alignSelf: 'center' }} color="primary" />

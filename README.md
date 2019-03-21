@@ -113,6 +113,9 @@ The file should look like this:
     "password": YOUR-PASSWORD
 } 
 ```
+
+To run Cypress, run: `yarn run cypress open` in the client directory
+
 ## Mocha/Chai
 Running the Mocha/Chai tests will require an extra environment variable;
 
