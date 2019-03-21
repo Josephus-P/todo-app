@@ -7,11 +7,8 @@ import Home from './components/home/Home';
 import Login from './components/login/Login';
 import Register from './components/register/Register';
 import PasswordReset from './components/passwordreset/PasswordReset';
-import TodoPage from './components/todo/TodoPage';
-import AddTodoPage from './components/todo/AddTodoPage';
-import EditTodoPage from './components/todo/EditTodoPage';
+import Todo from './components/todo/Todo';
 import axios from 'axios';
-import ViewTodoPage from './components/todo/ViewTodoPage';
 import * as ROUTES from './constants/routes';
 import theme from './theme/theme';
 import 'typeface-roboto';
@@ -30,7 +27,7 @@ class App extends Component {
           .getIdToken()
           .then(idToken => {
             axios.defaults.headers.common['Authorization'] = idToken;
-            console.log(authUser);
+
             axios
               .post('/verifyregistration')
               .then(response => {
@@ -109,48 +106,12 @@ class App extends Component {
               )}
             />
             <Route
-              exact
               path={ROUTES.TODO_DASH}
               render={() => (
-                <TodoPage
+                <Todo
                   loading={loading}
                   authUser={authUser}
                   firebase={firebase}
-                />
-              )}
-            />
-            <Route
-              path={ROUTES.TODO_ADD}
-              render={props => (
-                <AddTodoPage
-                  loading={loading}
-                  authUser={authUser}
-                  firebase={firebase}
-                  {...props}
-                />
-              )}
-            />
-            <Route
-              exact
-              path={ROUTES.TODO_VIEW}
-              render={props => (
-                <ViewTodoPage
-                  loading={loading}
-                  authUser={authUser}
-                  firebase={firebase}
-                  {...props}
-                />
-              )}
-            />
-            <Route
-              exact
-              path={ROUTES.TODO_EDIT}
-              render={props => (
-                <EditTodoPage
-                  loading={loading}
-                  authUser={authUser}
-                  firebase={firebase}
-                  {...props}
                 />
               )}
             />
