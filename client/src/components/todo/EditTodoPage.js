@@ -105,6 +105,15 @@ class EditTodoPage extends Component {
                 <Button variant="contained" type="submit" color="primary">
                   Update
                 </Button>
+                <Button
+                  component={Link}
+                  to="/todo"
+                  variant="contained"
+                  type="submit"
+                  color="primary"
+                >
+                  Cancel
+                </Button>
               </div>
             </form>
           </Paper>

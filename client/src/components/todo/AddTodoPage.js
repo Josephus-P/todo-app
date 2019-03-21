@@ -105,6 +105,15 @@ class AddTodoPage extends Component {
                 <Button variant="contained" type="submit" color="primary">
                   Add Todo
                 </Button>
+                <Button
+                  component={Link}
+                  to="/todo"
+                  variant="contained"
+                  type="submit"
+                  color="primary"
+                >
+                  Cancel
+                </Button>
               </div>
             </form>
           </Paper>

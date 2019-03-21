@@ -44,7 +44,7 @@ const styles = theme => ({
   buttonWrapper: {
     display: 'flex',
     width: '100%',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     padding: theme.spacing.unit * 3,
   },
   link: {
