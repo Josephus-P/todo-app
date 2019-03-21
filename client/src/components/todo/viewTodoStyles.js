@@ -30,7 +30,14 @@ const styles = theme => ({
     display: 'flex',
     justifyContent: 'center',
     width: '100%',
-    marginTop: '50px',
+    marginTop: '25px',
+  },
+  navIcons: {
+    display: 'flex',
+    justifyContent: 'flex-start',
+    width: '100%',
+    marginTop: '25px',
+    paddingLeft: '50px',
   },
   link: {
     textDecoration: 'none',

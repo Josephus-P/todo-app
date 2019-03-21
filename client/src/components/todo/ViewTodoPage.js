@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import ArrowBack from '@material-ui/icons/ArrowBack';
+import Assignment from '@material-ui/icons/Assignment';
 import Paper from '@material-ui/core/Paper';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -44,6 +47,12 @@ class ViewTodoPage extends Component {
             </Button>
           </Toolbar>
         </AppBar>
+        <div className={classes.navIcons}>
+          <IconButton component={Link} to="/todo">
+            <ArrowBack />
+          </IconButton>
+          <Assignment style={{ alignSelf: 'center' }} color="primary" />
+        </div>
         <main className={classes.main}>
           <Paper className={classes.paper}>
             <div className={classes.buttonWrapper}>

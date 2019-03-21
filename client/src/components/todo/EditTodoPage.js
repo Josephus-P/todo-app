@@ -47,6 +47,10 @@ class EditTodoPage extends Component {
       });
   };
 
+  goBack = () => () => {
+    this.props.history.goBack();
+  };
+
   render() {
     const { classes, authUser, loading, location } = this.props;
     const { title, description } = this.state;
@@ -106,11 +110,9 @@ class EditTodoPage extends Component {
                   Update
                 </Button>
                 <Button
-                  component={Link}
-                  to="/todo"
                   variant="contained"
-                  type="submit"
                   color="primary"
+                  onClick={this.goBack()}
                 >
                   Cancel
                 </Button>
