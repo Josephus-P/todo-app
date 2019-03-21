@@ -24,7 +24,7 @@ const styles = theme => ({
     display: 'flex',
     alignItems: 'center',
   },
-  messageWrapper: { display: 'inline-block', width: '90%' },
+  messageWrapper: { display: 'inline-block', width: '80%' },
   icon: {
     marginRight: theme.spacing.unit,
   },

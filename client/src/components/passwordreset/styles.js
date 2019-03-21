@@ -37,7 +37,7 @@ const styles = theme => ({
   },
   loading: {
     marginTop: '25%',
-    padding: theme.spacing.unit,
+    padding: theme.spacing.unit * 3,
   },
 });
 

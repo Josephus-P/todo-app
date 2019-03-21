@@ -17,13 +17,12 @@ import styles from './styles';
 
 const INITIAL_STATE = {
   email: '',
-  password: '',
   openSnackbar: false,
   snackbarMessage: '',
   snackbarVariant: '',
 };
 
-class Login extends Component {
+class PasswordReset extends Component {
   state = {
     ...INITIAL_STATE,
   };
@@ -34,12 +33,17 @@ class Login extends Component {
 
   onSubmit = event => {
     event.preventDefault();
-    const { email, password } = this.state;
+    const { email } = this.state;
 
     this.props.firebase
-      .signInWithEmailAndPassword(email, password)
+      .passwordReset(email)
       .then(response => {
-        this.setState({ ...INITIAL_STATE });
+        this.setState({
+          snackbarMessage: 'Reset email sent!',
+          openSnackbar: true,
+          snackbarVariant: 'success',
+          email: '',
+        });
       })
       .catch(err => {
         this.setState({
@@ -60,7 +64,6 @@ class Login extends Component {
     const { classes, loading, authUser } = this.props;
     const {
       email,
-      password,
       openSnackbar,
       snackbarMessage,
       snackbarVariant,
@@ -93,7 +96,7 @@ class Login extends Component {
         <main className={classes.main}>
           <Paper className={classes.paper}>
             <Typography component="h1" variant="h5">
-              Login
+              Reset Password
             </Typography>
             <form className={classes.form} onSubmit={this.onSubmit}>
               <FormControl margin="normal" required fullWidth>
@@ -107,16 +110,6 @@ class Login extends Component {
                   autoFocus
                 />
               </FormControl>
-              <FormControl margin="normal" required fullWidth>
-                <InputLabel htmlFor="password">Password</InputLabel>
-                <Input
-                  name="password"
-                  type="password"
-                  id="password"
-                  value={password}
-                  onChange={this.handleChange}
-                />
-              </FormControl>
               <Button
                 type="submit"
                 fullWidth
@@ -124,14 +117,9 @@ class Login extends Component {
                 color="primary"
                 className={classes.submit}
               >
-                Login
+                Send Reset Email
               </Button>
             </form>
-            <Link to="password-reset">
-              <Typography component="p" variant="body1">
-                Forgot Password?
-              </Typography>
-            </Link>
           </Paper>
           <CustomSnackbar
             open={openSnackbar}
@@ -146,8 +134,8 @@ class Login extends Component {
   }
 }
 
-Login.propTypes = {
+PasswordReset.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Login);
+export default withStyles(styles)(PasswordReset);

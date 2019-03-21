@@ -6,6 +6,7 @@ import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import Home from './components/home/Home';
 import Login from './components/login/Login';
 import Register from './components/register/Register';
+import PasswordReset from './components/passwordreset/PasswordReset';
 import TodoPage from './components/todo/TodoPage';
 import AddTodoPage from './components/todo/AddTodoPage';
 import EditTodoPage from './components/todo/EditTodoPage';
@@ -90,6 +91,16 @@ class App extends Component {
               path="/register"
               render={() => (
                 <Register
+                  loading={loading}
+                  authUser={authUser}
+                  firebase={firebase}
+                />
+              )}
+            />
+            <Route
+              path="/password-reset"
+              render={() => (
+                <PasswordReset
                   loading={loading}
                   authUser={authUser}
                   firebase={firebase}
