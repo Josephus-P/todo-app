@@ -26,6 +26,13 @@ exports.seed = function(knex, Promise) {
           createdAt: '3/21/19',
           description: 'This is my third todo',
         },
+        {
+          id: 4,
+          title: 'My final todo',
+          user_uid: 'test-uid',
+          createdAt: '3/21/19',
+          description: 'This is my final todo',
+        },
       ]);
     });
 };

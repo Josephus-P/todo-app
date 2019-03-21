@@ -36,17 +36,7 @@ const todos = [
   },
 ];
 
-// response for /api/users/todos
-const userTodos = [
-  {
-    id: 4,
-    title: 'My final todo',
-    createdAt: '3/21/19',
-    description: 'This is my final todo',
-  },
-];
-
 module.exports = {
-  userTodos,
   todos,
+  users,
 };
