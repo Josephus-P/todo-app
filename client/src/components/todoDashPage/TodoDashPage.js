@@ -10,6 +10,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
+import CustomSnackbar from '../snackbar/CustomSnackbar';
 import withStyles from '@material-ui/core/styles/withStyles';
 import axios from 'axios';
 import * as ROUTES from '../../constants/routes';
@@ -20,6 +21,9 @@ class TodoPage extends Component {
     todos: [],
     gettingTodos: true,
     checked: [],
+    openSnackbar: false,
+    snackbarMessage: '',
+    snackbarVariant: '',
   };
 
   componentDidMount() {
@@ -75,14 +79,41 @@ class TodoPage extends Component {
     axios
       .delete('/api/todos', { data: { checked } })
       .then(response => {
-        this.setState({ todos, checked: [] });
+        this.setState({
+          todos,
+          checked: [],
+          snackbarMessage: 'Successfully deleted todos!',
+          snackbarVariant: 'success',
+          openSnackbar: true,
+        });
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        this.setState({
+          checked: [],
+          snackbarMessage: 'Error deleting todos!',
+          snackbarVariant: 'error',
+          openSnackbar: true,
+        });
+      });
+  };
+
+  snackbarClose = () => {
+    this.setState({
+      openSnackbar: false,
+    });
   };
 
   render() {
     const { classes, authUser, loading } = this.props;
-    const { todos, gettingTodos, checked } = this.state;
+    const {
+      todos,
+      gettingTodos,
+      checked,
+      snackbarMessage,
+      snackbarVariant,
+      openSnackbar,
+    } = this.state;
     const disabled = checked.length > 0 ? false : true;
 
     if (loading || gettingTodos) {
@@ -157,6 +188,13 @@ class TodoPage extends Component {
             )}
           </Grid>
         </Grid>
+        <CustomSnackbar
+          open={openSnackbar}
+          variant={snackbarVariant}
+          message={snackbarMessage}
+          onClose={this.snackbarClose}
+          onClick={this.snackbarClose}
+        />
       </main>
     );
   }
