@@ -1,3 +1,4 @@
+[![CircleCI](https://circleci.com/gh/Josephus-P/yaro-todo/tree/master.svg?style=svg)](https://circleci.com/gh/Josephus-P/yaro-todo/tree/master)
 # Table of Contents
 - [Getting Started](#getting-started)
     - [What You Need](#what-you-need)
