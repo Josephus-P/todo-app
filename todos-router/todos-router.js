@@ -1,15 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../db/dbConfig');
+const db = require('../db/dbHelpers/todoHelpers');
 
 // Return all todos for a user
 router.get('/users/todos', async (req, res) => {
   const { uid } = req.body;
 
   try {
-    const todos = await db('todos')
-      .where('user_uid', uid)
-      .select('id', 'title', 'createdAt', 'description');
+    const todos = await db.getTodosByUID(uid);
 
     if (todos) {
       res.status(200).json(todos);
@@ -33,7 +31,7 @@ router.post('/todos', async (req, res) => {
   };
 
   try {
-    const id = await db('todos').insert(todo, ['id']);
+    const id = await db.insertTodo(todo);
 
     if (id) {
       res.status(201).json(id);
@@ -50,13 +48,12 @@ router.post('/todos', async (req, res) => {
 router.put('/todos/:id', async (req, res) => {
   const { id } = req.params;
   const { title, description } = req.body;
+  const data = { title, description };
 
   try {
-    const data = await db('todos')
-      .where('id', id)
-      .update({ title, description });
+    const response = await db.updateTodo(id, data);
 
-    if (data) {
+    if (response) {
       res.status(200).json(data);
     } else {
       res.status(500).json({ error: 'Todo not found' });
@@ -72,9 +69,7 @@ router.delete('/todos', async (req, res) => {
   const { checked } = req.body;
 
   try {
-    const data = await db('todos')
-      .whereIn('id', checked)
-      .del();
+    const data = await db.deleteTodos(checked);
 
     if (data) {
       res.status(200).json(data);
