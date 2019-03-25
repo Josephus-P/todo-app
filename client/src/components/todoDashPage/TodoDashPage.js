@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
@@ -27,24 +27,9 @@ class TodoPage extends Component {
   };
 
   componentDidMount() {
-    const { authUser } = this.props;
-    if (authUser) {
-      axios.get('/api/users/todos').then(response => {
-        this.setState({ todos: response.data, gettingTodos: false });
-      });
-    }
-  }
-
-  // Get the todos if the user is logged in.
-  // Handles the case when a user refreshes the page
-  componentDidUpdate(prevProps) {
-    const { authUser } = this.props;
-
-    if (authUser && authUser !== prevProps.authUser) {
-      axios.get('/api/users/todos').then(response => {
-        this.setState({ todos: response.data, gettingTodos: false });
-      });
-    }
+    axios.get('/api/users/todos').then(response => {
+      this.setState({ todos: response.data, gettingTodos: false });
+    });
   }
 
   handleCheckToggle = id => () => {
@@ -105,7 +90,7 @@ class TodoPage extends Component {
   };
 
   render() {
-    const { classes, authUser, loading } = this.props;
+    const { classes, loading } = this.props;
     const {
       todos,
       gettingTodos,
@@ -118,9 +103,6 @@ class TodoPage extends Component {
 
     if (loading || gettingTodos) {
       return <Loader className={classes.loading} size={80} />;
-    }
-    if (!authUser) {
-      return <Redirect to={ROUTES.SIGNIN} />;
     }
 
     return (

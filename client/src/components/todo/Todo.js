@@ -37,27 +37,21 @@ const Todo = props => {
         <Route
           exact
           path={ROUTES.TODO_DASH}
-          render={() => <TodoDashPage loading={loading} authUser={authUser} />}
+          render={() => <TodoDashPage loading={loading} />}
         />
         <Route
           path={ROUTES.TODO_ADD}
-          render={props => (
-            <AddTodoPage loading={loading} authUser={authUser} {...props} />
-          )}
+          render={props => <AddTodoPage loading={loading} {...props} />}
         />
         <Route
           exact
           path={ROUTES.TODO_VIEW}
-          render={props => (
-            <ViewTodoPage loading={loading} authUser={authUser} {...props} />
-          )}
+          render={props => <ViewTodoPage loading={loading} {...props} />}
         />
         <Route
           exact
           path={ROUTES.TODO_EDIT}
-          render={props => (
-            <EditTodoPage loading={loading} authUser={authUser} {...props} />
-          )}
+          render={props => <EditTodoPage loading={loading} {...props} />}
         />
       </Switch>
     </>

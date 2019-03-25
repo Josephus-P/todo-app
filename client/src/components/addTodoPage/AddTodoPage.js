@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
@@ -46,14 +46,11 @@ class AddTodoPage extends Component {
   };
 
   render() {
-    const { classes, authUser, loading } = this.props;
+    const { classes, loading } = this.props;
     const { title, description } = this.state;
 
     if (loading) {
       return <Loader className={classes.loading} size={80} />;
-    }
-    if (!authUser) {
-      return <Redirect to={ROUTES.SIGNIN} />;
     }
 
     return (

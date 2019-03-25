@@ -47,14 +47,11 @@ class EditTodoPage extends Component {
   };
 
   render() {
-    const { classes, authUser, loading, location } = this.props;
+    const { classes, loading, location } = this.props;
     const { title, description } = this.state;
 
     if (loading) {
       return <Loader className={classes.loading} size={80} />;
-    }
-    if (!authUser) {
-      return <Redirect to={ROUTES.SIGNIN} />;
     }
     if (!location.state) {
       return <Redirect to={ROUTES.TODO_DASH} />;

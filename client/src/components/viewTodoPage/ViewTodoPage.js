@@ -14,14 +14,11 @@ import * as ROUTES from '../../constants/routes';
 import styles from './styles';
 
 const ViewTodoPage = props => {
-  const { classes, authUser, loading, location } = props;
+  const { classes, loading, location } = props;
   const todo = { ...location.state };
 
   if (loading) {
     return <Loader className={classes.loading} size={80} />;
-  }
-  if (!authUser) {
-    return <Redirect to={ROUTES.SIGNIN} />;
   }
   if (!location.state) {
     return <Redirect to={ROUTES.TODO_DASH} />;
