@@ -54,7 +54,7 @@ router.put('/todos/:id', async (req, res) => {
     const response = await db.updateTodo(id, data);
 
     if (response) {
-      res.status(200).json(data);
+      res.status(200).json(response);
     } else {
       res.status(500).json({ error: 'Todo not found' });
     }
