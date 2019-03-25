@@ -1,0 +1,15 @@
+version: 2.1
+jobs:
+  test:
+    docker:
+      - image: circleci/node:8.15.1
+    steps:
+      - checkout
+      - run: echo "Running server tests..."
+      - run: yarn install
+      - run: yarn test
+workflows:
+  version: 2.1
+  test:
+    jobs:
+      - test
