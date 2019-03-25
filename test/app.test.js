@@ -24,7 +24,7 @@ describe('Todos', () => {
       await knex.seed.run();
 
       customToken = await admin.auth().createCustomToken(uid);
-
+      console.log('customToken: ', customToken);
       // Swap custom token for an idToken
       const res = await rp({
         url: `https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyCustomToken?key=${
@@ -39,6 +39,7 @@ describe('Todos', () => {
       });
 
       idToken = res.idToken;
+      console.log(idToken);
     } catch (error) {
       console.log(error);
     }
