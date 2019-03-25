@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Link, Switch } from 'react-router-dom';
+import { Route, Link, Switch, Redirect } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
@@ -14,6 +14,10 @@ import styles from './styles';
 
 const Todo = props => {
   const { authUser, loading, firebase, classes } = props;
+
+  if (!authUser) {
+    return <Redirect to={ROUTES.SIGNIN} />;
+  }
 
   return (
     <>
