@@ -10,7 +10,6 @@ jobs:
       - run: yarn test
 workflows:
   version: 2.1
-  build_test:
+  test:
     jobs:
-      - build
       - test
