@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import Loader from '../loader/Loader';
 import Typography from '@material-ui/core/Typography';
 import styles from './styles';
+import * as ROUTES from '../../constants/routes';
 
 const Home = props => {
   const { loading, authUser, classes } = props;
@@ -14,7 +15,7 @@ const Home = props => {
     return <Loader className={classes.loading} size={80} />;
   }
   if (authUser) {
-    return <Redirect to="/todo" />;
+    return <Redirect to={ROUTES.TODO_DASH} />;
   }
 
   return (
@@ -39,7 +40,7 @@ const Home = props => {
         <Button
           variant="contained"
           component={Link}
-          to="/login"
+          to={ROUTES.SIGNIN}
           color="primary"
         >
           Login
@@ -47,7 +48,7 @@ const Home = props => {
         <Button
           variant="contained"
           component={Link}
-          to="/register"
+          to={ROUTES.REGISTER}
           color="primary"
         >
           Signup

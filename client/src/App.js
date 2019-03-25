@@ -67,13 +67,7 @@ class App extends Component {
             <Route
               exact
               path={ROUTES.LANDING}
-              render={() => (
-                <Home
-                  loading={loading}
-                  authUser={authUser}
-                  firebase={firebase}
-                />
-              )}
+              render={() => <Home loading={loading} authUser={authUser} />}
             />
             <Route
               path={ROUTES.SIGNIN}

@@ -71,7 +71,7 @@ class Login extends Component {
       return <Loader className={classes.loading} size={80} />;
     }
     if (authUser) {
-      return <Redirect to="/todo" />;
+      return <Redirect to={ROUTES.TODO_DASH} />;
     }
 
     return (
