@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  server:
     docker:
       - image: circleci/node:8.15.1
 
@@ -8,7 +8,7 @@ jobs:
 
     steps:
       - checkout
-
+      - run: echo "Testing the server..."
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -24,8 +24,42 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       - run: yarn test
+  build:
+    docker:
+      - image: circleci/node:8.15.1
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+      - run: echo "Starting the server..."
+
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - run: yarn install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+      - run: yarn start & sleep 5
+
+      - run: yarn --cwd ~/repo/client install
+
+      - save_cache:
+          paths:
+            - /repo/client/node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+      - run: yarn --cwd ~/repo/client cy:run
 workflows:
   version: 2
-  build:
+  server_client:
     jobs:
       - build
+      - client
