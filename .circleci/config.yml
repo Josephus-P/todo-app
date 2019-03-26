@@ -56,7 +56,7 @@ jobs:
       - run: yarn cy:run
 workflows:
   version: 2
-  client_server:
+  server_client:
     jobs:
       - server
       - client
