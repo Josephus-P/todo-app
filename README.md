@@ -115,7 +115,7 @@ The file should look like this:
 } 
 ```
 
-To run Cypress, run: `yarn run cypress open` in the client directory
+To run Cypress, make sure the server and app are running and then run: `yarn cy:run` in the root directory
 
 ## Mocha/Chai
 Running the Mocha/Chai tests will require an extra environment variable;
