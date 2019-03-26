@@ -24,42 +24,37 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       - run: yarn test
-  build:
+  cypress:
     docker:
-      - image: circleci/node:8.15.1
+      - image: cypress/base:8
+        environment:
+          TERM: xterm
 
     working_directory: ~/repo
-
     steps:
       - checkout
-      - run: echo "Starting the server..."
-
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
+            - v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
+            - v1-deps-{{ .Branch }}
+            - v1-deps
 
-      - run: yarn install
-
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-
-      - run: yarn start & sleep 5
-
-      - run: yarn --cwd ~/repo/client install
+      - run: yarn install --frozen-lockfile
 
       - save_cache:
+          key: v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
           paths:
-            - /repo/client/node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
+            - ~/.cache ## cache both yarn and Cypress!
 
-      - run: yarn --cwd ~/repo/client cy:run
+      - run: yarn start
+
+      - run: yarn --cwd ~/repo/client install --frozen-lockfile
+
+      - run: yarn --cwd ~/repo/client start & sleep 20
+
+      - run: yarn cy:run
 workflows:
   version: 2
   server_client:
     jobs:
-      - build
-      - client
+      - cypress
