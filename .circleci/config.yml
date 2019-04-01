@@ -59,4 +59,3 @@ workflows:
   server_client:
     jobs:
       - server
-      - client
